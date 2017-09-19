@@ -23,7 +23,28 @@ io.on('connection',(socket)=>{
 	socket.on('disconnect',()=>{
 		console.log('client disconnected');
 	});
+	/*socket.emit('newEmail',{
+		from: 'mike@example.com',
+		text: 'Hello ',
+		createAt: 123
+	});
+	
+	socket.on('createEmail',(newEmail)=>{
+		console.log('createEmail',newEmail);
+	});*/
+
+	socket.emit('newMessage',{
+			from: 'hello@example.com',
+			text:"bankai",
+			createdAt: 123
+		});
+	
+	socket.on('createMessage',(message)=>{
+		console.log('createMessage', message);
+	});
 });
+
+
 
 
 server.listen(port,()=>{

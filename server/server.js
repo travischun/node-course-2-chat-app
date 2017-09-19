@@ -3,7 +3,7 @@ const http = require('http');
 const path = require('path');
 const socketIO = require('socket.io');
 
-const {generateMessage} = require('./utils/message');
+const {generateMessage,generateLocationMessage} = require('./utils/message');
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
 /*
@@ -20,9 +20,6 @@ app.use(express.static(publicPath));
 io.on('connection',(socket)=>{
 	console.log('new user connected');
 
-	socket.on('disconnect',()=>{
-		console.log('client disconnected');
-	});
 	/*socket.emit('newEmail',{
 		from: 'mike@example.com',
 		text: 'Hello ',
@@ -50,6 +47,14 @@ io.on('connection',(socket)=>{
 			createdAt:new Date().getTime()
 		});*/
 		callback('This is from the server');
+	});
+
+	socket.on('disconnect',()=>{
+		console.log('client disconnected');
+	});
+
+	socket.on('createLocationMessage',(coords)=>{
+		io.emit('newLocationMessage',generateLocationMessage('Admin',coords.latitude,coords.longitude));
 	});
 });
 

@@ -8,10 +8,10 @@ socket.on('connect',function(){
 		text:'Hello world'
 	});*/
 
-	socket.emit('createMessage',{
+	/*socket.emit('createMessage',{
 		from: 'hello@example.com',
 		text: 'bankai senbonzakura'
-	});
+	});*/
 });
 
 socket.on('disconnect',function(){
